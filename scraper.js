@@ -1,5 +1,6 @@
 import request from 'request-promise';
 import cheerio from 'cheerio';
+import numeral from 'numeral';
 
 const fecthLinksFromPage = (pageNumber) => {
   const url = 'https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/ordenar/plano/ordem/DESC/qtdpag/50/pagina/'+pageNumber;
@@ -19,6 +20,24 @@ const extractCarLinksFromPage = (html) => {
   const $ = cheerio.load(html);
   return $('dt a').toArray();
 }
+
+const formatPrice = (fullPrice) => {
+  const tempString = fullPrice.trim().replace('R$', '').replace('.', '');
+  return numeral(tempString.substring(0, tempString.length -3)).value();
+}
+
+const extractCar = (html) => {
+  const $ = cheerio.load(html);
+  const link = $('dt a')[0].attribs.href;
+  const fullName = $('img')[0].attribs.alt;
+  const price = $('.preco_busca').text();
+  return { 
+    link: 'https://www.seminovosbh.com.br'+link,
+    fullName,
+    price: formatPrice(price)
+  }
+}
+
 
 const fetchLinks = (maxPages) => {
   const initialUrl = 'https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/ordenar/plano/ordem/DESC/qtdpag/50/';
@@ -44,4 +63,4 @@ const fetchLinks = (maxPages) => {
   })
 }
 
-module.exports = { fetchLinks }
+module.exports = { fetchLinks, extractCar, formatPrice }
