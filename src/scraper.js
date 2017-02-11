@@ -1,6 +1,7 @@
 import request from 'request-promise';
 import cheerio from 'cheerio';
 import numeral from 'numeral';
+import _ from 'lodash';
 
 import { Car } from './models';
 
@@ -9,7 +10,7 @@ const fecthLinksFromPage = (pageNumber) => {
 
   return request(url)
     .then((html) => {
-      return extractCarLinksFromPage(html);
+      return extractCarFromSearch(html);
     });
 }
 
@@ -18,9 +19,14 @@ const extractTotalNumberOfPages = (html) => {
   return $('strong.total').text();
 }
 
-const extractCarLinksFromPage = (html) => {
+const extractCarFromSearch = (html) => {
   const $ = cheerio.load(html);
-  return $('dt a').toArray();
+  const cars = [];
+  $('.bg-busca').each((index, el) => {
+    const car = extractCar($(el).html());
+    cars.push(car);
+  });
+  return cars;
 }
 
 const formatPrice = (fullPrice) => {
@@ -33,10 +39,14 @@ const extractCar = (html) => {
   const link = $('dt a')[0].attribs.href;
   const fullName = $('img')[0].attribs.alt;
   const price = $('.preco_busca').text();
+  const year = Number($('dd p').first().text().split('/')[0]);
+  const km = Number($('dd p').eq(1).text().replace('Km', '').trim());
   return new Car( 
     'https://www.seminovosbh.com.br'+link,
-    fullName,
-    formatPrice(price)
+    fullName.replace(',',''),
+    formatPrice(price),
+    year,
+    km
   );
 }
 
@@ -61,8 +71,8 @@ const fetchLinks = (maxPages) => {
     return Promise.all(promisesQueue);
   })
   .then((listOfListOfLinks) => {
-    return [].concat.apply([], listOfListOfLinks);
+    return _.flattenDeep(listOfListOfLinks);
   })
 }
 
-module.exports = { fetchLinks, extractCar, formatPrice }
+module.exports = { fetchLinks, extractCar, formatPrice };

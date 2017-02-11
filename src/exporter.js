@@ -2,11 +2,12 @@ import { Car } from './models';
 import Promise from 'bluebird';
 import fs from 'fs';
 
-const header = 'Link,Modelo,Preco \n';
 
 const toCsvFormat = (carList) => {
+  if (carList.length < 1) throw new Error('empty list');
+  const header = Object.keys(carList[0]).join(',') + '\n';
   return header + carList.reduce((acumulator, actual) => {
-    return acumulator += actual.link + ',' + actual.fullName + ',' + actual.price + '\n';
+    return acumulator += Object.values(actual).join(',') + '\n';
   }, '');
 }
 

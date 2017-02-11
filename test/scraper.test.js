@@ -2,25 +2,25 @@ import scraper from '../src/scraper';
 import { Car } from '../src/models';
 
 describe('scraper', () => {
-	beforeEach(function() {
+	beforeEach(() => {
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 	});
 
-	test('Fetch initial car', () => {
-		return scraper.fetchLinks(1).then((links) => {
-			const firstLink = links[0].attribs.href;
-
+	test.skip('Fetch initial car', (done) => {
+		scraper.fetchLinks(1).then((links) => {
       expect(links instanceof Array).toBeTruthy();
       expect(links[0] instanceof Car).toBeTruthy();
-			expect(links[0].link).toEqual('/veiculo/codigo/');
+			expect(links[0].link.includes('/veiculo/codigo')).toBeTruthy();
+      done();
 		})
-		.catch(e => { return e; });
 	})
 
-	test.skip('Fetch initial cars from several pages from Seminovos', () => {
-		return scraper.fetchLinks(2).then((links) => {
-			const firstLink = links[0].attribs.href;
-			expect(firstLink.includes('/veiculo/codigo/')).toBeTruthy();
+	test.skip('Fetch initial cars from several pages from Seminovos', (done) => {
+		scraper.fetchLinks(2).then((links) => {
+      expect(links instanceof Array).toBeTruthy();
+      expect(links[0] instanceof Car).toBeTruthy();
+			expect(links[0].link.includes('/veiculo/codigo')).toBeTruthy();
+      done();
 		});
 	})
 
@@ -31,6 +31,8 @@ describe('scraper', () => {
     expect(car.link).toBe('https://www.seminovosbh.com.br/veiculo/codigo/2015484');
     expect(car.fullName).toBe('Fiat Palio 1.0 8V FIRE ECONOMY' );
     expect(car.price).toBe(18500);
+    expect(car.year).toBe(2012);
+    expect(car.km).toBe(78000);
 	});
 
   test('can format numbers', () => {
