@@ -2,6 +2,8 @@ import request from 'request-promise';
 import cheerio from 'cheerio';
 import numeral from 'numeral';
 
+import { Car } from './models';
+
 const fecthLinksFromPage = (pageNumber) => {
   const url = 'https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/ordenar/plano/ordem/DESC/qtdpag/50/pagina/'+pageNumber;
 
@@ -31,11 +33,11 @@ const extractCar = (html) => {
   const link = $('dt a')[0].attribs.href;
   const fullName = $('img')[0].attribs.alt;
   const price = $('.preco_busca').text();
-  return { 
-    link: 'https://www.seminovosbh.com.br'+link,
+  return new Car( 
+    'https://www.seminovosbh.com.br'+link,
     fullName,
-    price: formatPrice(price)
-  }
+    formatPrice(price)
+  );
 }
 
 

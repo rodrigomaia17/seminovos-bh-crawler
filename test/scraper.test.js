@@ -1,14 +1,18 @@
-import scraper from './scraper';
+import scraper from '../src/scraper';
+import { Car } from '../src/models';
 
 describe('scraper', () => {
 	beforeEach(function() {
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 	});
 
-	test.skip('Fetch initial car', () => {
+	test('Fetch initial car', () => {
 		return scraper.fetchLinks(1).then((links) => {
 			const firstLink = links[0].attribs.href;
-			expect(firstLink.includes('/veiculo/codigo/')).toBeTruthy();
+
+      expect(links instanceof Array).toBeTruthy();
+      expect(links[0] instanceof Car).toBeTruthy();
+			expect(links[0].link).toEqual('/veiculo/codigo/');
 		})
 		.catch(e => { return e; });
 	})
@@ -23,6 +27,7 @@ describe('scraper', () => {
 	test('can parse one car attributes', () => {
 		const car = scraper.extractCar(singleCar);
 
+    expect(car instanceof Car ).toBeTruthy();
     expect(car.link).toBe('https://www.seminovosbh.com.br/veiculo/codigo/2015484');
     expect(car.fullName).toBe('Fiat Palio 1.0 8V FIRE ECONOMY' );
     expect(car.price).toBe(18500);
