@@ -2,45 +2,44 @@ import scraper from '../src/scraper';
 import { Car } from '../src/models';
 
 describe('scraper', () => {
-	beforeEach(() => {
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-	});
+  beforeEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+  });
 
-	test.skip('Fetch initial car', (done) => {
-		scraper.fetchLinks(1).then((links) => {
+  test.skip('Fetch initial car', (done) => {
+    scraper.fetchLinks(1).then((links) => {
       expect(links instanceof Array).toBeTruthy();
       expect(links[0] instanceof Car).toBeTruthy();
-			expect(links[0].link.includes('/veiculo/codigo')).toBeTruthy();
+      expect(links[0].link.includes('/veiculo/codigo')).toBeTruthy();
       done();
-		})
-	})
+    });
+  });
 
-	test.skip('Fetch initial cars from several pages from Seminovos', (done) => {
-		scraper.fetchLinks(2).then((links) => {
+  test.skip('Fetch initial cars from several pages from Seminovos', (done) => {
+    scraper.fetchLinks(2).then((links) => {
       expect(links instanceof Array).toBeTruthy();
       expect(links[0] instanceof Car).toBeTruthy();
-			expect(links[0].link.includes('/veiculo/codigo')).toBeTruthy();
+      expect(links[0].link.includes('/veiculo/codigo')).toBeTruthy();
       done();
-		});
-	})
+    });
+  });
 
-	test('can parse one car attributes', () => {
-		const car = scraper.extractCar(singleCar);
+  test('can parse one car attributes', () => {
+    // eslint-disable-next-line no-use-before-define
+    const car = scraper.extractCar(singleCar);
 
-    expect(car instanceof Car ).toBeTruthy();
+    expect(car instanceof Car).toBeTruthy();
     expect(car.link).toBe('https://www.seminovosbh.com.br/veiculo/codigo/2015484');
-    expect(car.fullName).toBe('Fiat Palio 1.0 8V FIRE ECONOMY' );
+    expect(car.fullName).toBe('Fiat Palio 1.0 8V FIRE ECONOMY');
     expect(car.price).toBe(18500);
     expect(car.year).toBe(2012);
     expect(car.km).toBe(78000);
-	});
+  });
 
   test('can format numbers', () => {
     expect(scraper.formatPrice(' R$ 23.110,00')).toBe(23110);
-  })
+  });
 });
-
-
 
 
 const singleCar = `<dt>

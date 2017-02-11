@@ -13,9 +13,18 @@
     "babel-cli": "^6.22.2",
     "babel-jest": "^18.0.0",
     "babel-polyfill": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0"
+    "babel-preset-es2015": "^6.22.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "nodemon": "^1.11.0"
   },
   "scripts": {
+    "lint": "eslint  src test lib test --ext .js,.jsx",
+    "lint-fix": "eslint --fix  src test lib test --ext .js,.jsx",
+    "watch-lint": "nodemon -e js,jsx --exec 'npm run lint --silent' --watch src --watch test",
     "test": "jest",
     "test-watch": "jest --watch"
   }

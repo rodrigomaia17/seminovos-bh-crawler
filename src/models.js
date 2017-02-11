@@ -10,4 +10,4 @@ class Car {
 
 }
 
-module.exports = {Car}
+module.exports = { Car };
