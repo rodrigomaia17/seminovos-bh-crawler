@@ -1,5 +1,5 @@
 import exporter from '../src/exporter';
-import { Car } from '../src/models';
+import Car from '../../models/Car.js';
 
 
 describe('exporter', () => {

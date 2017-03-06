@@ -1,5 +1,5 @@
 import scraper from '../src/scraper';
-import { Car } from '../src/models';
+import Car from '../../models/Car.js';
 
 describe('scraper', () => {
   beforeEach(() => {

@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 import numeral from 'numeral';
 import _ from 'lodash';
 
-import { Car } from './models';
+import Car from '../../models/Car.js';
 
 const formatPrice = (fullPrice) => {
   const tempString = fullPrice.trim().replace('R$', '').replace('.', '');

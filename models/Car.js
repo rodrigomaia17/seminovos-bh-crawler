@@ -1,4 +1,4 @@
-class Car {
+export default class Car {
 
   constructor(link, fullName, price, year, km) {
     this.link = link;
@@ -9,5 +9,3 @@ class Car {
   }
 
 }
-
-module.exports = { Car };
