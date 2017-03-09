@@ -1,6 +1,12 @@
 import React from 'react';
 import Car from '../../models/Car.js';
 
+class CarFilter extends React.Component {
+  render(){
+    return (<div> <input name='filter' value={this.props.currentFilter} onChange={ (event) => this.props.onFilterChange(event.target.value) } /> </div>);
+  }
+}
+
 export default class CarTableContainer extends React.Component {
 
   constructor(){
@@ -10,13 +16,17 @@ export default class CarTableContainer extends React.Component {
     }
   }
 
+  onFilterChange(value){
+    this.setState({currentFilter: value});
+  }
+
   render() {
     const cars = [
       new Car('link1', 'Fox', 31990, 2013, 38000),
       new Car('link2', 'Palio', 31990, 2013, 38000),
       new Car('link3', 'CrossFox', 31990, 2013, 38000),
       new Car('link4', 'Gol', 31990, 2013, 38000),
-    ];
+    ].filter((c) => c.fullName.toUpperCase().match(this.state.currentFilter.toUpperCase()));
 
     const CarLine = ({car}) => (
       <tr>
@@ -33,11 +43,8 @@ export default class CarTableContainer extends React.Component {
       return (<table><tbody>{lines}</tbody></table>);
     }
 
-    const CarFilter = ({onFilterChange}) => {
-      return (<div> <input name='filter' /> </div>);
-    }
 
-    return (<div><CarFilter /><CarTable cars={cars} /></div>);
+    return (<div><CarFilter currentFilter={this.state.currentFilter} onFilterChange={this.onFilterChange.bind(this)} /><CarTable cars={cars} /></div>);
   }
 
 }
