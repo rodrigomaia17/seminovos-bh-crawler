@@ -1,9 +1,11 @@
 import React from 'react';
+import Immutable from 'immutable';
 import ReactDOM from 'react-dom';
 import Car from '../models/Car.js';
+import CarTableContainer from './containers/CarTableContainer.jsx';
 
 
 ReactDOM.render(
-  <h1>Hello, Drigz! </h1>,
+  <CarTableContainer />,
   document.getElementById('root')
 )
