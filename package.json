@@ -1,11 +1,13 @@
 {
   "dependencies": {
     "Promise": "^1.0.5",
+    "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
     "express": "^4.15.0",
     "immutable": "^3.8.1",
     "jest": "^19.0.2",
     "lodash": "^4.17.4",
+    "lowdb": "^0.16.0",
     "morgan": "^1.8.1",
     "msexcel-builder": "^0.0.2",
     "numeral": "^2.0.4",
@@ -13,7 +15,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "request": "^2.79.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
@@ -40,6 +43,7 @@
     "build-watch": "webpack -w",
     "buildp": "webpack -p",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "scraper": "babel-node crawler/app.js"
   }
 }

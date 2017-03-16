@@ -41,6 +41,7 @@ jspm_packages
 #test files
 carros.csv
 test.csv
+cars.json
 
 TAGS
 

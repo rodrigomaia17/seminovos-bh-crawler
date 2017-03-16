@@ -11,8 +11,12 @@ const toCsvFormat = (carList) => {
   return csv;
 };
 
-const saveFile = fileContent => new Promise((resolve, reject) => {
-  fs.writeFile('carros.csv', fileContent, (err) => {
+const toJSON = (carList) => {
+  return JSON.stringify(carList);
+}
+
+const saveFile = (fileContent, fileName) => new Promise((resolve, reject) => {
+  fs.writeFile(fileName, fileContent, (err) => {
     if (err) {
       reject(err);
     } else {
@@ -21,9 +25,14 @@ const saveFile = fileContent => new Promise((resolve, reject) => {
   });
 });
 
-const saveCars = (carList) => {
+const saveCarsToCSV = (carList) => {
   const csv = toCsvFormat(carList);
-  saveFile(csv);
+  return saveFile(csv, 'cars.csv');
 };
 
-module.exports = { toCsvFormat, saveCars };
+const saveCarsToJSON = (carList) => {
+  const file = toJSON({ cars: carList });
+  return saveFile(file, 'cars.json');
+};
+
+module.exports = { toJSON, toCsvFormat, saveCarsToCSV, saveCarsToJSON };

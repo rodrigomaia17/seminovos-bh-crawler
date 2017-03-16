@@ -12,4 +12,15 @@ describe('exporter', () => {
 
     expect(result).toEqual(expected);
   });
+
+
+  test('can create JSON from Car', () => {
+    const car = new Car('a', 'b', 1, 2010, 10000);
+
+    const result = exporter.toJSON([car]);
+
+    const expected = "[{\"link\":\"a\",\"fullName\":\"b\",\"price\":1,\"year\":2010,\"km\":10000}]";
+
+    expect(result).toEqual(expected);
+  });
 });
