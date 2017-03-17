@@ -11,9 +11,7 @@ const toCsvFormat = (carList) => {
   return csv;
 };
 
-const toJSON = (carList) => {
-  return JSON.stringify(carList);
-}
+const toJSON = carList => JSON.stringify(carList);
 
 const saveFile = (fileContent, fileName) => new Promise((resolve, reject) => {
   fs.writeFile(fileName, fileContent, (err) => {

@@ -6,5 +6,5 @@ import CarTableContainer from './containers/CarTableContainer.jsx';
 
 ReactDOM.render(
   <CarTableContainer />,
-  document.getElementById('root')
-)
+  document.getElementById('root'),
+);

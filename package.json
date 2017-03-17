@@ -36,8 +36,8 @@
   },
   "scripts": {
     "dev": "concurrently --kill-others \"npm run build-watch\" \"node app.js\"",
-    "lint": "eslint  src test lib test --ext .js,.jsx",
-    "lint-fix": "eslint --fix  src test lib test --ext .js,.jsx",
+    "lint": "eslint api app crawler models --ext .js,.jsx",
+    "lint-fix": "eslint --fix api app crawler models --ext .js,.jsx",
     "watch-lint": "nodemon -e js,jsx --exec 'npm run lint --silent' --watch src --watch test",
     "build": "webpack",
     "build-watch": "webpack -w",

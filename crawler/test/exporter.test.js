@@ -19,7 +19,7 @@ describe('exporter', () => {
 
     const result = exporter.toJSON([car]);
 
-    const expected = "[{\"link\":\"a\",\"fullName\":\"b\",\"price\":1,\"year\":2010,\"km\":10000}]";
+    const expected = '[{"link":"a","fullName":"b","price":1,"year":2010,"km":10000}]';
 
     expect(result).toEqual(expected);
   });
