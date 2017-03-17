@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "Promise": "^1.0.5",
+    "axios": "^0.15.3",
     "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
     "express": "^4.15.0",
@@ -35,7 +36,7 @@
     "webpack": "^2.2.1"
   },
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run build-watch\" \"node app.js\"",
+    "dev": "concurrently --kill-others \"npm run build-watch\" \"babel-node app.js\"",
     "lint": "eslint api app crawler models --ext .js,.jsx",
     "lint-fix": "eslint --fix api app crawler models --ext .js,.jsx",
     "watch-lint": "nodemon -e js,jsx --exec 'npm run lint --silent' --watch src --watch test",

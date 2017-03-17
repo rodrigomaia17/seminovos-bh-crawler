@@ -1,5 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import Car from '../../models/Car.js';
+import _ from 'lodash';
 
 class CarFilter extends React.Component {
   render() {
@@ -13,6 +15,7 @@ export default class CarTableContainer extends React.Component {
     super();
     this.state = {
       currentFilter: '',
+      cars: [],
     };
   }
 
@@ -20,13 +23,21 @@ export default class CarTableContainer extends React.Component {
     this.setState({ currentFilter: value });
   }
 
+  componentWillUpdate(nextProps, nextState){
+    const nextFilter = nextState.currentFilter.trim();
+    if( this.state.currentFilter !== nextFilter) {
+      if(nextState.currentFilter.length > 2 ){
+        axios.get(`/api/cars?query=${nextFilter}`)
+             .then((response) => {
+               this.setState({cars: _.uniqBy(response.data.cars, 'link')});
+             });
+      } else {
+        this.setState({cars: []})
+      }
+    }
+   }
+
   render() {
-    const cars = [
-      new Car('link1', 'Fox', 31990, 2013, 38000),
-      new Car('link2', 'Palio', 31990, 2013, 38000),
-      new Car('link3', 'CrossFox', 31990, 2013, 38000),
-      new Car('link4', 'Gol', 31990, 2013, 38000),
-    ].filter(c => c.fullName.toUpperCase().match(this.state.currentFilter.toUpperCase()));
 
     const CarLine = ({ car }) => (
       <tr>
@@ -39,12 +50,15 @@ export default class CarTableContainer extends React.Component {
     );
 
     const CarTable = ({ cars }) => {
-      const lines = cars.map(c => <CarLine key={c.link} car={c} />);
-      return (<table><tbody>{lines}</tbody></table>);
+      if(cars.length > 0) {
+        const lines = cars.map(c => <CarLine key={c.link} car={c} />);
+        return (<table><tbody>{lines}</tbody></table>)
+      };
+      return <h1> Bem vindo ao Crawler do Seminovos BH, digite o que quiser acima </h1>
     };
 
 
-    return (<div><CarFilter currentFilter={this.state.currentFilter} onFilterChange={this.onFilterChange.bind(this)} /><CarTable cars={cars} /></div>);
+    return (<div><CarFilter currentFilter={this.state.currentFilter} onFilterChange={this.onFilterChange.bind(this)} /><CarTable cars={this.state.cars} /></div>);
   }
 
 }
