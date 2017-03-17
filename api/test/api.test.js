@@ -8,14 +8,14 @@ describe('GET /api/cars', () => {
   beforeEach(() => {
   });
 
-  test.skip('respond with json', () => {
+  test('respond with json', () => {
     return request(api)
       .get('/api/cars')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then(response => {
-        expect(response.body.cars).toBe('foo@bar.com');
+        expect(response.body.cars).toEqual([]);
       });
   });
 });
