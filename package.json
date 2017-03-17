@@ -5,6 +5,7 @@
     "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
     "express": "^4.15.0",
+    "forever": "^0.15.3",
     "immutable": "^3.8.1",
     "jest": "^19.0.2",
     "lodash": "^4.17.4",
@@ -45,6 +46,7 @@
     "buildp": "webpack -p",
     "test": "jest",
     "test-watch": "jest --watch",
-    "scraper": "babel-node crawler/app.js"
+    "scraper": "babel-node crawler/app.js",
+    "start": "forever -o out.log -e err.log -c node_modules/.bin/babel-node app.js"
   }
 }
