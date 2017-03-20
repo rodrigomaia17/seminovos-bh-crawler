@@ -42,4 +42,22 @@ describe('GET /api/cars', () => {
         expect(response.body.cars[0].fullName).toEqual('fox');
       });
   });
+
+  test('respond with cars that match criteria with many words', () => {
+    db.get('cars')
+      .push(new Car('a', 'fox', 20000, 2013, 100000))
+      .push(new Car('a', 'fox outro', 20000, 2013, 100000))
+      .push(new Car('a', 'gol', 20000, 2013, 100000))
+      .write();
+
+    return request(api)
+      .get('/api/cars?query=Fox outro')
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.cars.length).toEqual(1);
+        expect(response.body.cars[0].fullName).toEqual('fox outro');
+      });
+  });
 });

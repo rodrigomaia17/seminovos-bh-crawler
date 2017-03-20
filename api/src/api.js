@@ -2,6 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 
+const matchCriteria = (entry, query) => {
+  return JSON.stringify(entry)
+    .toUpperCase()
+    .includes(query.toUpperCase());
+}
+
 export default function (db, currentExpressApp = express()) {
   const app = currentExpressApp;
   app.use(bodyParser.json()); // support json encoded bodies
@@ -9,12 +15,12 @@ export default function (db, currentExpressApp = express()) {
 
   app.get('/api/cars', (req, res) => {
     const query = req.query.query;
-    if (req.query.query) {
-      const result = db.get('cars').filter(c => (
-        JSON.stringify(c)
-          .toUpperCase()
-          .includes(query.toUpperCase())
-      )).value();
+    if (query) {
+      const result = db.get('cars').filter(c => {
+        return query.split(' ').reduce((result, q) => {
+          return result && matchCriteria(c,q);
+        }, true);
+      }).value();
       res.status(200).json({ cars: result || [] });
     } else {
       res.status(200).json({ cars: [] });

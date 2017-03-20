@@ -51,7 +51,7 @@ export default class CarTableContainer extends React.Component {
   render() {
     const CarLine = ({ car }) => (
       <tr>
-        <td>{car.link}</td>
+        <td><a href={car.link} target="_blank" >link</a></td>
         <td>{car.fullName}</td>
         <td>{car.price}</td>
         <td>{car.year}</td>
