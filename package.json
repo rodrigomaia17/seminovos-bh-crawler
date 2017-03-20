@@ -46,7 +46,7 @@
     "buildp": "webpack -p",
     "test": "jest",
     "test-watch": "jest --watch",
-    "scraper": "babel-node crawler/app.js",
+    "crawler": "babel-node crawler/app.js",
     "start": "forever -o out.log -e err.log -c node_modules/.bin/babel-node app.js"
   }
 }

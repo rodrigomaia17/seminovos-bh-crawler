@@ -46,3 +46,4 @@ cars.json
 TAGS
 
 public/bundle.js
+*.backup

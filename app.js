@@ -4,7 +4,7 @@ const path = require('path');
 const lowdb = require('lowdb');
 import api from './api/src/api.js';
 
-const db = lowdb('cars.json');
+const db = lowdb('db/cars.json');
 const app = express();
 
 api(db,app);

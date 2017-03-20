@@ -30,7 +30,7 @@ const saveCarsToCSV = (carList) => {
 
 const saveCarsToJSON = (carList) => {
   const file = toJSON({ cars: carList });
-  return saveFile(file, 'cars.json');
+  return saveFile(file, 'db/cars.json');
 };
 
 module.exports = { toJSON, toCsvFormat, saveCarsToCSV, saveCarsToJSON };

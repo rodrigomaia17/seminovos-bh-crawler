@@ -6,6 +6,12 @@ services:
     ports:
     - "3000:3000"
     volumes:
-      - ./cars.json:/home/seminovos/cars.json
+      - ./db:/home/seminovos/db
     command: npm run start
+
+  crawler:
+    build: .
+    volumes:
+      - ./db:/home/seminovos/db
+    command: npm run crawler
 
