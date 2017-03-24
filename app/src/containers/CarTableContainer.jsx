@@ -7,8 +7,10 @@ class CarFilter extends React.Component {
   render() {
     return (
       <div>
-        <DebounceInput debounceTimeout={300} name="filter" value={this.props.currentFilter}
-          onChange={event => this.props.onFilterChange(event.target.value)} />
+        <DebounceInput
+          debounceTimeout={300} name="filter" value={this.props.currentFilter}
+          onChange={event => this.props.onFilterChange(event.target.value)}
+        />
       </div>
     );
   }

@@ -2,11 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 
-const matchCriteria = (entry, query) => {
-  return JSON.stringify(entry)
+const matchCriteria = (entry, query) => JSON.stringify(entry)
     .toUpperCase()
     .includes(query.toUpperCase());
-}
 
 export default function (db, currentExpressApp = express()) {
   const app = currentExpressApp;
@@ -16,11 +14,7 @@ export default function (db, currentExpressApp = express()) {
   app.get('/api/cars', (req, res) => {
     const query = req.query.query;
     if (query) {
-      const result = db.get('cars').filter(c => {
-        return query.split(' ').reduce((result, q) => {
-          return result && matchCriteria(c,q);
-        }, true);
-      }).value();
+      const result = db.get('cars').filter(c => query.split(' ').reduce((result, q) => result && matchCriteria(c, q), true)).value();
       res.status(200).json({ cars: result || [] });
     } else {
       res.status(200).json({ cars: [] });
