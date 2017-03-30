@@ -52,7 +52,7 @@
     "dev": "concurrently --kill-others \"npm run build-watch\" \"babel-node app.js\"",
     "lint": "eslint api app crawler models --ext .js,.jsx",
     "lint-fix": "eslint --fix api app crawler models --ext .js,.jsx",
-    "watch-lint": "nodemon -e js,jsx --exec 'npm run lint --silent' --watch src --watch test",
+    "watch-lint": "nodemon -e js,jsx --exec 'npm run lint --silent' --watch api app crawler models --watch .",
     "build": "webpack",
     "build-watch": "webpack -w",
     "buildp": "webpack -p",

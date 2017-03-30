@@ -4,10 +4,11 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import sinon from 'sinon';
 
+import reducer, * as carsActions from '../../src/ducks/cars.js';
+
 // This sets the mock adapter on the default instance
 const mock = new MockAdapter(axios);
 
-import reducer, * as carsActions from '../../src/ducks/cars.js';
 
 describe('cars module test', () => {
   let store;
@@ -36,7 +37,7 @@ describe('cars module test', () => {
   test('test initial state', () => {
     const state = store.getState();
     expect(carsActions.selectCars(state)).toEqual([]);
-    expect(carsActions.selectCarFilter(state)).toBe("");
+    expect(carsActions.selectCarFilter(state)).toBe('');
   });
 
   test('test isLoading starts with fetchCars ', () => {
@@ -56,7 +57,7 @@ describe('cars module test', () => {
 
   test('test fetchCarsSuccess', () => {
     store.getState().isLoading = true;
-    const cars = [{name:'a'}];
+    const cars = [{ name: 'a' }];
     const action = carsActions.fetchCarsSuccess(cars);
     store.dispatch(action);
     const state = store.getState();

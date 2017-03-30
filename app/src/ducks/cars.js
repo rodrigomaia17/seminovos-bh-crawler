@@ -34,11 +34,11 @@ export default handleActions({
     ...state,
     filter: action.payload,
   }),
-  [FETCH_CARS_START]: (state) => ({
+  [FETCH_CARS_START]: state => ({
     ...state,
     isLoading: true,
   }),
-  [FETCH_CARS_FAIL]: (state) => ({
+  [FETCH_CARS_FAIL]: state => ({
     ...state,
     isLoading: false,
   }),

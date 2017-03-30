@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import scraper from './src/scraper';
 import exporter from './src/exporter';
 

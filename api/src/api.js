@@ -14,7 +14,7 @@ export default function (db, currentExpressApp = express()) {
   app.get('/api/cars', (req, res) => {
     const query = req.query.query;
     if (query) {
-      const result = db.get('cars').filter(c => query.split(' ').reduce((result, q) => result && matchCriteria(c, q), true)).value();
+      const result = db.get('cars').filter(c => query.split(' ').reduce((resultCriteria, q) => resultCriteria && matchCriteria(c, q), true)).value();
       res.status(200).json({ cars: result || [] });
     } else {
       res.status(200).json({ cars: [] });
