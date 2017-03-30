@@ -33,6 +33,37 @@ describe('cars module test', () => {
     });
   };
 
+  test('test initial state', () => {
+    const state = store.getState();
+    expect(carsActions.selectCars(state)).toEqual([]);
+    expect(carsActions.selectCarFilter(state)).toBe("");
+  });
+
+  test('test isLoading starts with fetchCars ', () => {
+    const action = carsActions.fetchCarsStart();
+    store.dispatch(action);
+    const state = store.getState();
+    expect(carsActions.selectIsLoading(state)).toBe(true);
+  });
+
+  test('test fetchCarsFails', () => {
+    store.dispatch(carsActions.fetchCarsStart());
+    const action = carsActions.fetchCarsFailure();
+    store.dispatch(action);
+    const state = store.getState();
+    expect(carsActions.selectIsLoading(state)).toBe(false);
+  });
+
+  test('test fetchCarsSuccess', () => {
+    store.getState().isLoading = true;
+    const cars = [{name:'a'}];
+    const action = carsActions.fetchCarsSuccess(cars);
+    store.dispatch(action);
+    const state = store.getState();
+    expect(carsActions.selectIsLoading(state)).toBe(false);
+    expect(carsActions.selectCars(state)).toEqual(cars);
+  });
+
   test('test current filter change', () => {
     const answer = {
       cars: [
@@ -47,7 +78,7 @@ describe('cars module test', () => {
       [
         { type: carsActions.CHANGE_FILTER, payload: 'newFilter' },
         { type: carsActions.FETCH_CARS_START },
-        { type: carsActions.FETCH_CARS_END, payload: answer },
+        { type: carsActions.FETCH_CARS_END, payload: answer.cars },
       ].forEach(a => expect(dispatch.calledWith(a)).toBe(true));
 
       const state = store.getState();
