@@ -23,8 +23,7 @@ const CarFilter = ({ currentFilter, onFilterChange }) => {
 
 const CarLine = ({ car }) => (
   <tr>
-    <td><a href={car.link} rel="noopener noreferrer" target="_blank" >link</a></td>
-    <td>{car.fullName}</td>
+    <td><a href={car.link} rel="noopener noreferrer" target="_blank" >{car.fullName}</a></td>
     <td>{car.price}</td>
     <td>{car.year}</td>
     <td>{car.km}</td>
@@ -37,7 +36,7 @@ const CarTable = ({ cars, isLoading }) => {
   } else if (cars.length > 0) {
     const lines = cars.map(c => <CarLine key={c.link} car={c} />);
     return (<table><tbody>
-    <tr><th>Link</th><th>Name</th><th>Price</th><th>Year</th><th>Km</th></tr>
+    <tr><th>Name</th><th>Price</th><th>Year</th><th>Km</th></tr>
     {lines}
     </tbody></table>);
   }
@@ -53,7 +52,7 @@ const CarTableContainer = ({ cars, isLoading, currentFilter, onFilterChange }) =
 
 const mapStateToProps = state => ({
   cars: carsActions.selectCars(state),
-  isLoading: false,
+  isLoading: carsActions.selectIsLoading(state),
   currentFilter: carsActions.selectCarFilter(state),
 });
 
