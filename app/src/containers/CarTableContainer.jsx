@@ -64,7 +64,7 @@ const CarTable = ({ cars, isLoading }) => {
 const CarTableContainer = ({ cars, isLoading, currentFilter, onFilterChange }) => (
   <div>
     <section className="hero is-dark">
-      <div className="hero-body">
+      <div className="hero-body" style={{marginLeft: '1em' }}>
         <p className="title">Simplificando o Seminovos BH</p>
         <CarFilter currentFilter={currentFilter} onFilterChange={onFilterChange} />
       </div>
