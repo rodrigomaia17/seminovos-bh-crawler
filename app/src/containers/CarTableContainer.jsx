@@ -11,12 +11,28 @@ const CarFilter = ({ currentFilter, onFilterChange }) => {
     }
   };
 
+  const styles = {
+    input: {
+      fontSize: '1.5rem',
+      border: '1px solid #dbdbdb',
+    },
+    help: {
+      fontSize: '0.75rem',
+      marginTop: '0.25rem',
+    },
+  };
+
   return (
     <div>
       <DebounceInput
+        style={styles.input} type="text"
         debounceTimeout={300} name="filter" value={currentFilter}
         onChange={event => changeFilter(event.target.value)}
       />
+      { currentFilter.length < 3 ?
+        <p style={styles.help}>Insira qualquer texto de busca aqui.
+          Mínimo de 3 caracteres.  Ex: &quot;Fox Prime 1.6&quot; </p> :
+        <div /> }
     </div>
   );
 };
@@ -35,17 +51,24 @@ const CarTable = ({ cars, isLoading }) => {
     return (<p> Loading... </p>);
   } else if (cars.length > 0) {
     const lines = cars.map(c => <CarLine key={c.link} car={c} />);
-    return (<table><tbody>
-    <tr><th>Name</th><th>Price</th><th>Year</th><th>Km</th></tr>
-    {lines}
-    </tbody></table>);
+    return (<table className="table"><thead>
+      <tr><th>Name</th><th>Price</th><th>Year</th><th>Km</th></tr>
+    </thead>
+      <tbody>
+        {lines}
+      </tbody></table>);
   }
-  return <h1> Bem vindo ao Crawler do Seminovos BH, digite o que quiser acima </h1>;
+  return <div />;
 };
 
 const CarTableContainer = ({ cars, isLoading, currentFilter, onFilterChange }) => (
   <div>
-    <CarFilter currentFilter={currentFilter} onFilterChange={onFilterChange} />
+    <section className="hero is-dark">
+      <div className="hero-body">
+        <p className="title">Simplificando o Seminovos BH</p>
+        <CarFilter currentFilter={currentFilter} onFilterChange={onFilterChange} />
+      </div>
+    </section>
     <CarTable cars={cars} isLoading={isLoading} />
   </div>
   );
