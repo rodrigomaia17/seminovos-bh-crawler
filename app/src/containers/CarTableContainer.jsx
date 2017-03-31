@@ -3,6 +3,7 @@ import DebounceInput from 'react-debounce-input';
 import { connect } from 'react-redux';
 
 import * as carsActions from '../ducks/cars.js';
+import CarTable from '../components/CarTable.jsx';
 
 const CarFilter = ({ currentFilter, onFilterChange }) => {
   const changeFilter = (value) => {
@@ -37,34 +38,11 @@ const CarFilter = ({ currentFilter, onFilterChange }) => {
   );
 };
 
-const CarLine = ({ car }) => (
-  <tr>
-    <td><a href={car.link} rel="noopener noreferrer" target="_blank" >{car.fullName}</a></td>
-    <td>{car.price}</td>
-    <td>{car.year}</td>
-    <td>{car.km}</td>
-  </tr>
-);
-
-const CarTable = ({ cars, isLoading }) => {
-  if (isLoading) {
-    return (<p> Loading... </p>);
-  } else if (cars.length > 0) {
-    const lines = cars.map(c => <CarLine key={c.link} car={c} />);
-    return (<table className="table"><thead>
-      <tr><th>Name</th><th>Price</th><th>Year</th><th>Km</th></tr>
-    </thead>
-      <tbody>
-        {lines}
-      </tbody></table>);
-  }
-  return <div />;
-};
 
 const CarTableContainer = ({ cars, isLoading, currentFilter, onFilterChange }) => (
   <div>
     <section className="hero is-dark">
-      <div className="hero-body" style={{marginLeft: '1em' }}>
+      <div className="hero-body" style={{ marginLeft: '1em' }}>
         <p className="title">Simplificando o Seminovos BH</p>
         <CarFilter currentFilter={currentFilter} onFilterChange={onFilterChange} />
       </div>
