@@ -8,6 +8,6 @@ RUN yarn
 
 COPY . .
 
-RUN npm run build
+RUN npm run buildp
 
 CMD ["npm run start"]
