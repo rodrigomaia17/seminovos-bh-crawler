@@ -1,2 +1,2 @@
 # seminovos-bh-crawler
-Crawling seminovos-bh to avoid touching that shitty interface.
+Crawling seminovos-bh to avoid touching their buggy interface
