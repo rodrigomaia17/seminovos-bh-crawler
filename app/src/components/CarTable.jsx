@@ -21,7 +21,7 @@ export default class CarTable extends React.Component {
     } else if (cars.length > 0) {
       const lines = cars.map(c => <CarLine key={c.link} car={c} />);
       return (<table ref={(table) => { this.tableRef = table; }} className="table sortable"><thead>
-        <tr><th>Name</th><th>Price</th><th>Year</th><th>Km</th></tr>
+        <tr><th>Modelo</th><th>Preço</th><th>Ano</th><th>Km</th></tr>
       </thead>
         <tbody>
           {lines}
