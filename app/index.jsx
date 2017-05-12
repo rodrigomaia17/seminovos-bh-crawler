@@ -5,6 +5,8 @@ import logger from 'redux-logger';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import 'bulma';
+
 import CarTableContainer2 from './src/containers/CarTableContainer.jsx';
 import carsReducer from './src/ducks/cars.js';
 
