@@ -5,9 +5,10 @@ import fs from 'fs';
 const toCsvFormat = (carList) => {
   if (carList.length < 1) throw new Error('empty list');
   const header = `${Object.keys(carList[0]).join(',')}\n`;
-  const csv = header + carList.reduce((acumulator, actual) => (
-    `${acumulator}${Object.values(actual).join(',')}\n`
-  ), '');
+  const csv = header + carList.reduce((acumulator, actual) => {
+    const vals = Object.keys(actual).map(key => actual[key]);
+    return `${acumulator}${vals.join(',')}\n`;
+  }, '');
   return csv;
 };
 
