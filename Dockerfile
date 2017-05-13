@@ -2,7 +2,7 @@ FROM kkarczmarczyk/node-yarn:4.3.2
 
 WORKDIR /home/seminovos 
 
-COPY package.json package.json
+COPY package.json yarn.lock ./
 
 RUN yarn
 
