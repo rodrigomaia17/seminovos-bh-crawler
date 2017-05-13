@@ -42,14 +42,20 @@ const CarFilter = ({ currentFilter, onFilterChange }) => {
 const CarTableContainer = ({ cars, isLoading, currentFilter, onFilterChange }) => (
   <div>
     <section className="hero is-dark">
-      <div className="hero-body" style={{ marginLeft: '1em' }}>
-        <p className="title">Simplificando o Seminovos BH</p>
-        <CarFilter currentFilter={currentFilter} onFilterChange={onFilterChange} />
+      <div className="hero-body" >
+        <div className="container">
+          <div className="columns is-vcentered">
+            <div className="column is-narrow">
+              <p className="title">Simplificando o Seminovos BH</p>
+              <CarFilter currentFilter={currentFilter} onFilterChange={onFilterChange} />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <CarTable cars={cars} isLoading={isLoading} />
   </div>
-  );
+);
 
 const mapStateToProps = state => ({
   cars: carsActions.selectCars(state),
