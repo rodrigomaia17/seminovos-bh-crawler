@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import ReactDOM from 'react-dom';
@@ -10,7 +10,8 @@ import 'bulma';
 import CarTableContainer2 from './src/containers/CarTableContainer.jsx';
 import carsReducer from './src/ducks/cars.js';
 
-const store = createStore(carsReducer, applyMiddleware(thunk, logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(carsReducer, composeEnhancers(applyMiddleware(thunk, logger)));
 
 ReactDOM.render(
   <Provider store={store}>

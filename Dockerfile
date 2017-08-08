@@ -1,4 +1,4 @@
-FROM kkarczmarczyk/node-yarn:4.3.2
+FROM node:8.2.1
 
 WORKDIR /home/seminovos 
 

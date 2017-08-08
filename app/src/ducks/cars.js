@@ -1,6 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import { createAction, handleActions } from 'redux-actions';
+import { List } from 'immutable';
 
 // Actions types
 export const CHANGE_FILTER = 'cars/CHANGE_FILTER';
@@ -45,7 +46,7 @@ export default handleActions({
   [FETCH_CARS_END]: (state, action) => ({
     ...state,
     isLoading: false,
-    cars: action.payload,
+    cars: List(action.payload),
   }),
 }, initialState);
 

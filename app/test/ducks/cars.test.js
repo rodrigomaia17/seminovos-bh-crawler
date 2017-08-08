@@ -62,7 +62,7 @@ describe('cars module test', () => {
     store.dispatch(action);
     const state = store.getState();
     expect(carsActions.selectIsLoading(state)).toBe(false);
-    expect(carsActions.selectCars(state)).toEqual(cars);
+    expect(carsActions.selectCars(state).toJS()).toEqual(cars);
   });
 
   test('test current filter change', () => {
