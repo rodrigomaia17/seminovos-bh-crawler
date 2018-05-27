@@ -43,14 +43,14 @@ const extractCarFromSearch = (html) => {
 };
 
 const fecthLinksFromPage = (pageNumber) => {
-  const url = `https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/ordenar/plano/ordem/DESC/qtdpag/50/pagina/${pageNumber}`;
+  const url = `https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/cidade/2700/ordenar/plano/ordem/DESC/qtdpag/50/pagina/${pageNumber}`;
 
   return request(url)
     .then(html => extractCarFromSearch(html));
 };
 
 const fetchLinks = (maxPages) => {
-  const initialUrl = 'https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/ordenar/plano/ordem/DESC/qtdpag/50/';
+  const initialUrl = 'https://www.seminovosbh.com.br/resultadobusca/index/usuario/todos/cidade/2700/ordenar/plano/ordem/DESC/qtdpag/50/';
 
   return request(initialUrl)
     .then(html => extractTotalNumberOfPages(html))

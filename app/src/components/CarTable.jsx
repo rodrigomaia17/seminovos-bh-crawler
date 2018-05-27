@@ -1,4 +1,5 @@
 import React from 'react';
+import './cartable.scss';
 
 export default class CarTable extends React.Component {
 
